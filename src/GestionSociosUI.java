@@ -1,5 +1,8 @@
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,9 +11,9 @@ public class GestionSociosUI extends JFrame implements ScreenData {
     private JLabel textoBienvenida;
     private JButton verSociosBoton;
     private JButton agregarSocioBoton;
-    private JButton eliminarSocioBoton;
-    private JButton buscarSocioBoton;
-
+    private JButton verJugadoresBoton;
+    private JButton agregarJugadorBoton;
+    private JButton guardarBoton;
 
 
     public GestionSociosUI(GestionSocios<Socio> socios) {
@@ -35,6 +38,25 @@ public class GestionSociosUI extends JFrame implements ScreenData {
             public void actionPerformed(ActionEvent e) {
                 new VerSociosUI(socios);
                 dispose();
+            }
+        });
+        verJugadoresBoton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        guardarBoton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JSONArray array = new JSONArray();
+
+                for (Socio socio : socios.mapaSocios.values()){
+                    JSONObject json = new JSONObject(socio);
+                    array.put(json);
+                }
+
+                GestionArchivos.grabar(array, "thesocios");
             }
         });
     }

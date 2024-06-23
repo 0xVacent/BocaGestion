@@ -5,6 +5,13 @@ public abstract class Socio extends Persona{
     private int partidosVistos;
     private int idSocio;
 
+    public Socio(double cuota, int partidosVistos, int idSocio, String nombre, String apellido, int edad) {
+        super(nombre, apellido, edad);
+        this.cuota = cuota;
+        this.partidosVistos = partidosVistos;
+        this.idSocio = idSocio;
+    }
+
     public double getCuota() {
         return cuota;
     }
@@ -54,3 +61,4 @@ public abstract class Socio extends Persona{
 
 
 }
+

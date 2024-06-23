@@ -1,8 +1,14 @@
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
 public class SocioVitalicio extends Socio{
     private Date fechaInicioVitalicio;
+
+    public SocioVitalicio(int partidosVistos, int idSocio, String nombre, String apellido, int edad) {
+        super(0, partidosVistos, idSocio, nombre, apellido, edad);
+        this.fechaInicioVitalicio = Calendar.getInstance().getTime();
+    }
 
     public Date getFechaInicioVitalicio() {
         return fechaInicioVitalicio;
