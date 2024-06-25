@@ -1,3 +1,5 @@
+package Modelo;
+
 import java.util.Objects;
 
 public abstract class Persona {
@@ -50,7 +52,7 @@ public abstract class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" +
+        return "Modelo.Persona{" +
                 "nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", edad=" + edad +

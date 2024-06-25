@@ -1,8 +1,13 @@
+package GUI;
+
+import Interface.ScreenData;
+import Modelo.*;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EditarGUI extends JFrame implements ScreenData {
+public class EditarSocioGUI extends JFrame implements ScreenData {
     private JPanel EditarGUI;
     private JRadioButton adherenteBoton;
     private JRadioButton activoBoton;
@@ -19,11 +24,11 @@ public class EditarGUI extends JFrame implements ScreenData {
     private JButton volverBoton;
     private JButton aceptarBoton;
 
-    public EditarGUI(Object socio, GestionSocios<Socio> socios){
+    public EditarSocioGUI(Object socio, GestionSocios<Socio> socios, GestionJugadores<Jugador> jugadores) {
         setContentPane(EditarGUI);
         setTitle("Editar");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLocation((width/2) - 250,(height/2) - 300);
+        setLocation((ScreenData.width/2) - 250,(ScreenData.height/2) - 300);
         setResizable(false);
         setVisible(true);
         setSize(500, 600);
@@ -57,13 +62,15 @@ public class EditarGUI extends JFrame implements ScreenData {
         volverBoton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new VerSociosUI(socios);
+                new VerSociosUI(socios, jugadores);
                 dispose();
             }
         });
         aceptarBoton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                if(!idField.getText().equals("") && !nameField.getText().equals("") && !apellidoField.getText().equals("") && !edadField.getText().equals("")){
 
                 if (adherenteBoton.isSelected()) {
                     SocioAdherente newSocio = new SocioAdherente(((Socio) socio).getPartidosVistos(), Integer.parseInt(idField.getText()), nameField.getText(), apellidoField.getText(), Integer.parseInt(edadField.getText()));
@@ -76,7 +83,10 @@ public class EditarGUI extends JFrame implements ScreenData {
                     socios.updateSocio((Socio) socio, newSocio);
                 }
 
-                JOptionPane.showMessageDialog(EditarGUI, "Socio actualizado exitosamente");
+                    JOptionPane.showMessageDialog(EditarGUI, "Modelo.Socio actualizado exitosamente");
+                }else{
+                    JOptionPane.showMessageDialog(EditarGUI, "Por favor llene todos los campos");
+                }
             }
         });
         adherenteBoton.addActionListener(new ActionListener() {

@@ -1,3 +1,5 @@
+package Interface;
+
 import java.awt.*;
 
 public interface ScreenData {

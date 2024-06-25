@@ -1,3 +1,5 @@
+package Modelo;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
@@ -34,7 +36,7 @@ public class SocioAdherente extends Socio{
 
     @Override
     public String toString() {
-        return "SocioAdherente{" +
+        return "Modelo.SocioAdherente{" +
                 "fechaInicioAdherente=" + fechaInicioAdherente +
                 "} " + super.toString();
     }

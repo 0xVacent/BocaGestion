@@ -1,3 +1,7 @@
+package Interface;
+
+import Modelo.Socio;
+
 public interface InterfaceGestionSocios<T extends Socio>{
     boolean addSocio(T socio);
     boolean removeSocio(T socio);

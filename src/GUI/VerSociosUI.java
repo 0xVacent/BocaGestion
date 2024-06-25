@@ -1,3 +1,8 @@
+package GUI;
+
+import Interface.ScreenData;
+import Modelo.*;
+
 import javax.swing.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
@@ -14,15 +19,19 @@ public class VerSociosUI extends JFrame implements ScreenData {
     private JScrollPane scrollList;
     private JLabel searchLabel;
     private JTextField searchField;
+    private JTextArea infoField;
 
-    public VerSociosUI(GestionSocios<Socio> socios) {
+    public VerSociosUI(GestionSocios<Socio> socios, GestionJugadores<Jugador> jugadores) {
         setTitle("Socios");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setContentPane(VerSociosUI);
-        setLocation(width/2 - 250, height/2 - 300);
+        setLocation(ScreenData.width/2 - 250, ScreenData.height/2 - 300);
         setSize(500, 600);
         setVisible(true);
         setResizable(false);
+
+
+
 
         DefaultListModel<Socio> model = new DefaultListModel<>();
 
@@ -43,7 +52,7 @@ public class VerSociosUI extends JFrame implements ScreenData {
         volverBoton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new GestionSociosUI(socios);
+                new GestionSociosUI(socios, jugadores);
                 dispose();
             }
         });
@@ -54,12 +63,14 @@ public class VerSociosUI extends JFrame implements ScreenData {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                if (listaSocios.getSelectedValue() != null) {
+
                 if (JOptionPane.showConfirmDialog(null, "Esta seguro que quiere eliminar?", "Eliminar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     socios.removeSocio(listaSocios.getSelectedValue());
-                    System.out.println(listaSocios.getModel());
                     model.removeElement(listaSocios.getSelectedValue());
+                    infoField.setText("");
                 }
-
+                }
             }
         });
 
@@ -69,15 +80,29 @@ public class VerSociosUI extends JFrame implements ScreenData {
                 if (!e.getValueIsAdjusting()) {
                     Socio selectedSocio = listaSocios.getSelectedValue();
                     System.out.println(selectedSocio);
-                    // Additional handling code here
+
+                    if (selectedSocio != null) {
+                        infoField.setText("Nombre: " + selectedSocio.getNombre() + "\nApellido: " + selectedSocio.getApellido() + "\nID: " + selectedSocio.getIdSocio() + "\nEdad: " + selectedSocio.getEdad() + "\nCouta: " + selectedSocio.getCuota() + "\nPartidos Vistos: " + selectedSocio.getPartidosVistos());
+                        if (selectedSocio instanceof SocioActivo) {
+                            infoField.append("\n" + ((SocioActivo) selectedSocio).getFechaInicialActivo());
+                        }else if (selectedSocio instanceof SocioAdherente) {
+                            infoField.append("\n" + ((SocioAdherente) selectedSocio).getFechaInicioAdherente());
+                        }else if (selectedSocio instanceof SocioVitalicio){
+                            infoField.append("\n" + ((SocioVitalicio) selectedSocio).getFechaInicioVitalicio());
+                        }
+                    }
                 }
             }
         });
         EditarBoton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new EditarGUI(listaSocios.getSelectedValue(), socios);
+
+                if (listaSocios.getSelectedValue() != null) {
+
+                new EditarSocioGUI(listaSocios.getSelectedValue(), socios, jugadores);
                 dispose();
+                }
             }
         });
         searchField.addCaretListener(new CaretListener() {

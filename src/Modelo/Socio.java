@@ -1,3 +1,5 @@
+package Modelo;
+
 import java.util.Objects;
 
 public abstract class Socio extends Persona{
@@ -12,7 +14,7 @@ public abstract class Socio extends Persona{
         this.idSocio = idSocio;
     }
 
-    public double getCuota() {
+        public double getCuota() {
         return cuota;
     }
 
@@ -52,7 +54,7 @@ public abstract class Socio extends Persona{
 
     @Override
     public String toString() {
-        return "Socio{" +
+        return "Modelo.Socio{" +
                 "cuota=" + cuota +
                 ", partidosVistos=" + partidosVistos +
                 ", idSocio=" + idSocio +

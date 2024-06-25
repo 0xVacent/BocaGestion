@@ -1,3 +1,5 @@
+package Modelo;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
@@ -8,6 +10,10 @@ public class SocioActivo extends Socio{
     public SocioActivo(int partidosVistos, int idSocio, String nombre, String apellido, int edad) {
         super(16500, partidosVistos, idSocio, nombre, apellido, edad);
         this.fechaInicialActivo = Calendar.getInstance().getTime();
+    }
+    public SocioActivo(int partidosVistos, int idSocio, String nombre, String apellido, int edad, Date fechaInicialActivo) {
+        super(16500, partidosVistos, idSocio, nombre, apellido, edad);
+        this.fechaInicialActivo = fechaInicialActivo;
     }
 
     public Date getFechaInicialActivo() {
@@ -34,7 +40,7 @@ public class SocioActivo extends Socio{
 
     @Override
     public String toString() {
-        return "SocioActivo{" +
+        return "Modelo.SocioActivo{" +
                 "fechaInicialActivo=" + fechaInicialActivo +
                 "} " + super.toString();
     }
