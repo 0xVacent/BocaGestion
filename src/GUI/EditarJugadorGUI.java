@@ -7,6 +7,8 @@ import Modelo.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class EditarJugadorGUI extends JFrame implements ScreenData {
     private JPanel EditarJugadorGUI;
@@ -99,11 +101,19 @@ public class EditarJugadorGUI extends JFrame implements ScreenData {
 
                 if (!nombreField.getText().equals("") && !apellidoField.getText().equals("") && !edadField.getText().equals("") && !idField.getText().equals("") && !ataqueField.getText().equals("")) {
 
+                    LocalDate date = null;
+
+                    if (jugador instanceof JugadorPrimera) {
+                        date = ((JugadorPrimera) jugador).getInicioPrimera();
+                    }else if (jugador instanceof JugadorInferiores) {
+                        date = ((JugadorInferiores) jugador).getEntradaAcademia();
+                    }
+
                 if(primeraRadioButton.isSelected()) {
-                    JugadorPrimera newPlayer = new JugadorPrimera(nombreField.getText(), Integer.parseInt(edadField.getText()), apellidoField.getText(), (Posicion) posicionField.getSelectedItem(), Integer.parseInt(idField.getText()), Integer.getInteger(defensaField.getText()), Integer.parseInt(ataqueField.getText()), Double.valueOf(sueldoField.getText()));
+                    JugadorPrimera newPlayer = new JugadorPrimera(nombreField.getText(), Integer.parseInt(edadField.getText()), apellidoField.getText(), (Posicion) posicionField.getSelectedItem(), Integer.parseInt(idField.getText()), Integer.parseInt(defensaField.getText()), Integer.parseInt(ataqueField.getText()), Double.valueOf(sueldoField.getText()), date);
                     jugadores.updateJugador(jugador, newPlayer);
                 }else if (inferioresRadioButton.isSelected()) {
-                    JugadorInferiores newPlayer = new JugadorInferiores(nombreField.getText(), Integer.parseInt(edadField.getText()), apellidoField.getText(), (Posicion) posicionField.getSelectedItem(), Integer.parseInt(idField.getText()), Integer.parseInt(defensaField.getText()), Integer.parseInt(ataqueField.getText()), Double.valueOf(sueldoField.getText()));
+                    JugadorInferiores newPlayer = new JugadorInferiores(nombreField.getText(), Integer.parseInt(edadField.getText()), apellidoField.getText(), (Posicion) posicionField.getSelectedItem(), Integer.parseInt(idField.getText()), Integer.parseInt(defensaField.getText()), Integer.parseInt(ataqueField.getText()), Double.valueOf(sueldoField.getText()), date);
                     jugadores.updateJugador(jugador, newPlayer);
                 }
                 JOptionPane.showMessageDialog(EditarJugadorGUI, "Jugador actualizado exitosamente");

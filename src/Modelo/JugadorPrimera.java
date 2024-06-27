@@ -2,23 +2,28 @@ package Modelo;
 
 import Enums.Posicion;
 
+import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
 
 public class JugadorPrimera extends Jugador{
-    private Date inicioPrimera;
+    private LocalDate inicioPrimera;
 
     public JugadorPrimera(String nombre, int edad, String apellido, Posicion posicion, int idJugador, int defensa, int ataque, double sueldo) {
         super(nombre, edad, apellido, posicion, idJugador, defensa, ataque, sueldo);
-        inicioPrimera = Calendar.getInstance().getTime();
+        inicioPrimera = LocalDate.now();
     }
 
-    public Date getInicioPrimera() {
+    public JugadorPrimera(String nombre, int edad, String apellido, Posicion posicion, int idJugador, int defensa, int ataque, double sueldo, LocalDate inicioPrimera) {
+        super(nombre, edad, apellido, posicion, idJugador, defensa, ataque, sueldo);
+        this.inicioPrimera = inicioPrimera;
+    }
+
+    public LocalDate getInicioPrimera() {
         return inicioPrimera;
     }
 
-    public void setInicioPrimera(Date inicioPrimera) {
+    public void setInicioPrimera(LocalDate inicioPrimera) {
         this.inicioPrimera = inicioPrimera;
     }
 

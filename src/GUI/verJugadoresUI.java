@@ -77,7 +77,16 @@ public class verJugadoresUI extends JFrame implements ScreenData {
 
                     if (selectedJugador != null){
                         infoField.setText("Nombre: "+selectedJugador.getNombre() + "\nApellido: " + selectedJugador.getApellido() + "\nEdad: " + selectedJugador.getEdad() + "\nPosicion: " + selectedJugador.getPosicion().name() + "\nAtaque: " + selectedJugador.getAtaque() + "\nDefensa: " + selectedJugador.getDefensa() + "\nSueldo: " + selectedJugador.getSueldo());
+
+                        if (selectedJugador instanceof JugadorInferiores){
+                            infoField.append("\nFecha de incio en inferiores: " + ((JugadorInferiores) selectedJugador).getEntradaAcademia());
+                        }else if (selectedJugador instanceof JugadorPrimera){
+                            infoField.append("\nFecha de inicio en Primera: " + ((JugadorPrimera) selectedJugador).getInicioPrimera());
+                        }
+
                     }
+
+
 
 
                 }

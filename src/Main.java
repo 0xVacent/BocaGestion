@@ -9,8 +9,10 @@ public class Main {
 
 
         jugadores.mapaJugadores = GestionArchivos.parseJSONJugadores("theplayers");
-
         socios.mapaSocios = GestionArchivos.parseJSONSocios("thesocios");
+
+        socios.mejorarSocios();
+
 
         new GestionSociosUI(socios, jugadores);
 

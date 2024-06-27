@@ -1,22 +1,28 @@
 package Modelo;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
 public class SocioAdherente extends Socio{
-    private Date fechaInicioAdherente;
+    private LocalDate fechaInicioAdherente;
 
     public SocioAdherente(int partidosVistos, int idSocio, String nombre, String apellido, int edad) {
         super(8250, partidosVistos, idSocio, nombre, apellido, edad);
-        this.fechaInicioAdherente = Calendar.getInstance().getTime();
+        this.fechaInicioAdherente = LocalDate.now();
     }
 
-    public Date getFechaInicioAdherente() {
+    public SocioAdherente(int partidosVistos, int idSocio, String nombre, String apellido, int edad, LocalDate fechaInicioAdherente) {
+        super(8250, partidosVistos, idSocio, nombre, apellido, edad);
+        this.fechaInicioAdherente = fechaInicioAdherente;
+    }
+
+    public LocalDate getFechaInicioAdherente() {
         return fechaInicioAdherente;
     }
 
-    public void setFechaInicioAdherente(Date fechaInicioAdherente) {
+    public void setFechaInicioAdherente(LocalDate fechaInicioAdherente) {
         this.fechaInicioAdherente = fechaInicioAdherente;
     }
 

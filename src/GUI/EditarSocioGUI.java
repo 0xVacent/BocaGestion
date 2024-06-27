@@ -6,6 +6,7 @@ import Modelo.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 public class EditarSocioGUI extends JFrame implements ScreenData {
     private JPanel EditarGUI;
@@ -72,14 +73,26 @@ public class EditarSocioGUI extends JFrame implements ScreenData {
 
                 if(!idField.getText().equals("") && !nameField.getText().equals("") && !apellidoField.getText().equals("") && !edadField.getText().equals("")){
 
+                    LocalDate date = null;
+
+                    if (socio instanceof SocioAdherente){
+                        date = ((SocioAdherente) socio).getFechaInicioAdherente();
+                    }else if(socio instanceof SocioActivo){
+                        date = ((SocioActivo) socio).getFechaInicialActivo();
+
+                    }else if(socio instanceof SocioVitalicio){
+                        date = ((SocioVitalicio) socio).getFechaInicioVitalicio();
+                    }
+
+
                 if (adherenteBoton.isSelected()) {
-                    SocioAdherente newSocio = new SocioAdherente(((Socio) socio).getPartidosVistos(), Integer.parseInt(idField.getText()), nameField.getText(), apellidoField.getText(), Integer.parseInt(edadField.getText()));
+                    SocioAdherente newSocio = new SocioAdherente(((Socio) socio).getPartidosVistos(), Integer.parseInt(idField.getText()), nameField.getText(), apellidoField.getText(), Integer.parseInt(edadField.getText()), date);
                     socios.updateSocio((Socio) socio, newSocio);
                 }else if (activoBoton.isSelected()) {
-                    SocioActivo newSocio = new SocioActivo(((Socio) socio).getPartidosVistos(), Integer.parseInt(idField.getText()), nameField.getText(), apellidoField.getText(), Integer.parseInt(edadField.getText()));
+                    SocioActivo newSocio = new SocioActivo(((Socio) socio).getPartidosVistos(), Integer.parseInt(idField.getText()), nameField.getText(), apellidoField.getText(), Integer.parseInt(edadField.getText()), date);
                     socios.updateSocio((Socio) socio, newSocio);
                 }else if (vitalicioBoton.isSelected()) {
-                    SocioVitalicio newSocio = new SocioVitalicio(((Socio) socio).getPartidosVistos(), Integer.parseInt(idField.getText()), nameField.getText(), apellidoField.getText(), Integer.parseInt(edadField.getText()));
+                    SocioVitalicio newSocio = new SocioVitalicio(((Socio) socio).getPartidosVistos(), Integer.parseInt(idField.getText()), nameField.getText(), apellidoField.getText(), Integer.parseInt(edadField.getText()), date);
                     socios.updateSocio((Socio) socio, newSocio);
                 }
 

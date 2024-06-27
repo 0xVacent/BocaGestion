@@ -79,15 +79,17 @@ public class GestionArchivos {
             jsonArray = new JSONArray(response);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+
                 if (jsonObject.has("fechaInicialActivo")) {
 
-                    SocioActivo socioActivo = new SocioActivo(jsonObject.getInt("partidosVistos"), jsonObject.getInt("idSocio"), jsonObject.getString("nombre"), jsonObject.getString("apellido"), jsonObject.getInt("edad"));
+                    SocioActivo socioActivo = new SocioActivo(jsonObject.getInt("partidosVistos"), jsonObject.getInt("idSocio"), jsonObject.getString("nombre"), jsonObject.getString("apellido"), jsonObject.getInt("edad"), LocalDate.parse(jsonObject.getString("fechaInicialActivo"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
                     socios.put(socioActivo.getIdSocio(), socioActivo);
                 } else if (jsonObject.has("fechaInicioAdherente")) {
-                    SocioAdherente socioAdherente = new SocioAdherente(jsonObject.getInt("partidosVistos"), jsonObject.getInt("idSocio"), jsonObject.getString("nombre"), jsonObject.getString("apellido"), jsonObject.getInt("edad"));
+                    SocioAdherente socioAdherente = new SocioAdherente(jsonObject.getInt("partidosVistos"), jsonObject.getInt("idSocio"), jsonObject.getString("nombre"), jsonObject.getString("apellido"), jsonObject.getInt("edad"), LocalDate.parse(jsonObject.getString("fechaInicioAdherente"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                     socios.put(socioAdherente.getIdSocio(), socioAdherente);
                 } else if (jsonObject.has("fechaInicioVitalicio")) {
-                    SocioVitalicio socioVitalicio = new SocioVitalicio(jsonObject.getInt("partidosVistos"), jsonObject.getInt("idSocio"), jsonObject.getString("nombre"), jsonObject.getString("apellido"), jsonObject.getInt("edad"));
+                    SocioVitalicio socioVitalicio = new SocioVitalicio(jsonObject.getInt("partidosVistos"), jsonObject.getInt("idSocio"), jsonObject.getString("nombre"), jsonObject.getString("apellido"), jsonObject.getInt("edad"), LocalDate.parse(jsonObject.getString("fechaInicioVitalicio"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                     socios.put(socioVitalicio.getIdSocio(), socioVitalicio);
                 }
             }
@@ -114,11 +116,12 @@ public class GestionArchivos {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                 if (jsonObject.has("entradaAcademia")) {
-                    JugadorInferiores jugadorInferiores = new JugadorInferiores(jsonObject.getString("nombre"), jsonObject.getInt("edad"), jsonObject.getString("apellido"), (Posicion) jsonObject.get("posicion"), jsonObject.getInt("idJugador"), jsonObject.getInt("defensa"), jsonObject.getInt("ataque"), jsonObject.getDouble("sueldo"));
+                    Posicion posicion = Posicion.valueOf(jsonObject.getString("posicion"));
+                    JugadorInferiores jugadorInferiores = new JugadorInferiores(jsonObject.getString("nombre"), jsonObject.getInt("edad"), jsonObject.getString("apellido"), posicion, jsonObject.getInt("idJugador"), jsonObject.getInt("defensa"), jsonObject.getInt("ataque"), jsonObject.getDouble("sueldo"), LocalDate.parse(jsonObject.getString("entradaAcademia"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                     jugadores.put(jugadorInferiores.getIdJugador(), jugadorInferiores);
                 }else if (jsonObject.has("inicioPrimera")) {
                     Posicion posicion = Posicion.valueOf(jsonObject.getString("posicion"));
-                    JugadorPrimera jugadorPrimera = new JugadorPrimera(jsonObject.getString("nombre"), jsonObject.getInt("edad"), jsonObject.getString("apellido"), posicion, jsonObject.getInt("idJugador"), jsonObject.getInt("defensa"), jsonObject.getInt("ataque"), jsonObject.getDouble("sueldo"));
+                    JugadorPrimera jugadorPrimera = new JugadorPrimera(jsonObject.getString("nombre"), jsonObject.getInt("edad"), jsonObject.getString("apellido"), posicion, jsonObject.getInt("idJugador"), jsonObject.getInt("defensa"), jsonObject.getInt("ataque"), jsonObject.getDouble("sueldo"), LocalDate.parse(jsonObject.getString("inicioPrimera"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                     jugadores.put(jugadorPrimera.getIdJugador(), jugadorPrimera);
                 }
 

@@ -2,23 +2,28 @@ package Modelo;
 
 import Enums.Posicion;
 
+import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
 
 public class JugadorInferiores extends Jugador{
-    private Date entradaAcademia;
+    private LocalDate entradaAcademia;
 
     public JugadorInferiores(String nombre, int edad, String apellido, Posicion posicion, int idJugador, int defensa, int ataque, double sueldo) {
         super(nombre, edad, apellido, posicion, idJugador, defensa, ataque, sueldo);
-        entradaAcademia = Calendar.getInstance().getTime();
+        entradaAcademia = LocalDate.now();
     }
 
-    public Date getEntradaAcademia() {
+    public JugadorInferiores(String nombre, int edad, String apellido, Posicion posicion, int idJugador, int defensa, int ataque, double sueldo, LocalDate entradaAcademia) {
+        super(nombre, edad, apellido, posicion, idJugador, defensa, ataque, sueldo);
+        this.entradaAcademia = entradaAcademia;
+    }
+
+    public LocalDate getEntradaAcademia() {
         return entradaAcademia;
     }
 
-    public void setEntradaAcademia(Date entradaAcademia) {
+    public void setEntradaAcademia(LocalDate entradaAcademia) {
         this.entradaAcademia = entradaAcademia;
     }
 

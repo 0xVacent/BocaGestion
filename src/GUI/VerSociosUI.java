@@ -84,11 +84,14 @@ public class VerSociosUI extends JFrame implements ScreenData {
                     if (selectedSocio != null) {
                         infoField.setText("Nombre: " + selectedSocio.getNombre() + "\nApellido: " + selectedSocio.getApellido() + "\nID: " + selectedSocio.getIdSocio() + "\nEdad: " + selectedSocio.getEdad() + "\nCouta: " + selectedSocio.getCuota() + "\nPartidos Vistos: " + selectedSocio.getPartidosVistos());
                         if (selectedSocio instanceof SocioActivo) {
-                            infoField.append("\n" + ((SocioActivo) selectedSocio).getFechaInicialActivo());
+                            infoField.append("\nTipo de Socio: Socio Activo");
+                            infoField.append("\nFecha inicial de Activo: " + ((SocioActivo) selectedSocio).getFechaInicialActivo());
                         }else if (selectedSocio instanceof SocioAdherente) {
-                            infoField.append("\n" + ((SocioAdherente) selectedSocio).getFechaInicioAdherente());
+                            infoField.append("\nTipo de Socio: Socio Adherente");
+                            infoField.append("\nFecha inicial de Adherente: " + ((SocioAdherente) selectedSocio).getFechaInicioAdherente());
                         }else if (selectedSocio instanceof SocioVitalicio){
-                            infoField.append("\n" + ((SocioVitalicio) selectedSocio).getFechaInicioVitalicio());
+                            infoField.append("\nTipo de Socio: Socio Vitalicio");
+                            infoField.append("\nFecha inicial de Vitalicio: " + ((SocioVitalicio) selectedSocio).getFechaInicioVitalicio());
                         }
                     }
                 }

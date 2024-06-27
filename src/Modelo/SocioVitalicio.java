@@ -1,22 +1,28 @@
 package Modelo;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
 public class SocioVitalicio extends Socio{
-    private Date fechaInicioVitalicio;
+    private LocalDate fechaInicioVitalicio;
 
     public SocioVitalicio(int partidosVistos, int idSocio, String nombre, String apellido, int edad) {
         super(0, partidosVistos, idSocio, nombre, apellido, edad);
-        this.fechaInicioVitalicio = Calendar.getInstance().getTime();
+        this.fechaInicioVitalicio = LocalDate.now();
     }
 
-    public Date getFechaInicioVitalicio() {
+    public SocioVitalicio(int partidosVistos, int idSocio, String nombre, String apellido, int edad, LocalDate fechaInicioVitalicio) {
+        super(0, partidosVistos, idSocio, nombre, apellido, edad);
+        this.fechaInicioVitalicio = fechaInicioVitalicio;
+    }
+
+    public LocalDate getFechaInicioVitalicio() {
         return fechaInicioVitalicio;
     }
 
-    public void setFechaInicioVitalicio(Date fechaInicioVitalicio) {
+    public void setFechaInicioVitalicio(LocalDate fechaInicioVitalicio) {
         this.fechaInicioVitalicio = fechaInicioVitalicio;
     }
 
